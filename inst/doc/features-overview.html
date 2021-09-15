@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Jadwiga Słowik" />
+
+<meta name="date" content="2021-09-14" />
+
+<title>Overview of seqR features</title>
+
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Overview of seqR features</h1>
+<h4 class="author">Jadwiga Słowik</h4>
+<h4 class="date">2021-09-14</h4>
+
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>This vignette provides comprehensive overview of the features provided by <code>seqR</code> package with appropriate examples.</p>
+<p>The package consists of two functions that facilitate k-mer counting:</p>
+<ul>
+<li><code>count_kmers</code> (used for counting k-mers of one type)</li>
+<li><code>count_multimers</code> (a wrapper of <code>count_kmers</code>, used for counting k-mers of many types in a single invocation of the function)</li>
+</ul>
+<p>and one function that facilitates processing of k-mer matrices:</p>
+<ul>
+<li><code>rbind_columnwise</code> (a helper function used for merging several k-mer matrices that do not have same sets of columns)</li>
+</ul>
+</div>
+<div id="supported-input-sequences" class="section level2">
+<h2>Supported input sequences</h2>
+<p>The package supports all types of biological sequences, in particular, nucleic acids and proteins. In fact, there is no constraint regarding the domain of input. However, input sequences must conform to the one of the following representations.</p>
+<div id="string-vectors" class="section level3">
+<h3>String vectors</h3>
+<p>Example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count_kmers</span>(<span class="fu">c</span>(<span class="st">&quot;AAA&quot;</span>, <span class="st">&quot;ACDA&quot;</span>),</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">k=</span><span class="dv">2</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 x 4 sparse Matrix of class &quot;dgCMatrix&quot;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      A.A_0 C.D_0 A.C_0 D.A_0</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,]     2     .     .     .</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,]     .     1     1     1</span></span></code></pre></div>
+<p>This representation is more efficient and recommended to use. However, it does not support multi-character alphabets, as opposed to the second representation.</p>
+</div>
+<div id="list-of-string-vectors" class="section level3">
+<h3>List of string vectors</h3>
+<p>Example:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count_kmers</span>(<span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>), <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;A&quot;</span>)),</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">k=</span><span class="dv">2</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 x 4 sparse Matrix of class &quot;dgCMatrix&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      A.A_0 D.A_0 A.C_0 C.D_0</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,]     2     .     .     .</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,]     .     1     1     1</span></span></code></pre></div>
+</div>
+</div>
+<div id="supported-variants-of-k-mers" class="section level2">
+<h2>Supported variants of k-mers</h2>
+<p>A user explicitly specifies k-mer configuration using the following function parameters: <code>k</code>, <code>kmer_gaps</code>, and <code>positional</code> (for <code>count_kmers</code>). There are four major variants of k-mers: <strong>contiguous k-mers</strong>, <strong>gapped k-mers</strong>, <strong>positional contiguous k-mers</strong>, and <strong>positional gapped k-mers</strong>.</p>
+<div id="contiguous-k-mers" class="section level3">
+<h3>Contiguous k-mers</h3>
+<p>Contiguous k-mers can be defined as subwords of a fixed length. A user specifies the length of a k-mer with <code>k</code> parameter. The other function parameters should be <code>kmer_gaps = NULL</code> (default) and <code>positional = FALSE</code> (default).</p>
+<p>For example, 3-mers of sequence AABC are: AAB and ABC.</p>
+<div id="usage" class="section level4">
+<h4>Usage</h4>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count_kmers</span>(<span class="fu">c</span>(<span class="st">&quot;DDDVSVAA&quot;</span>, <span class="st">&quot;FFSFSVAAA&quot;</span>),</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">k=</span><span class="dv">5</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 x 9 sparse Matrix of class &quot;dgCMatrix&quot;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      D.D.V.S.V_0.0.0.0 D.D.D.V.S_0.0.0.0 V.S.V.A.A_0.0.0.0 D.V.S.V.A_0.0.0.0</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,]                 1                 1                 1                 1</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,]                 .                 .                 .                 .</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      F.S.F.S.V_0.0.0.0 F.S.V.A.A_0.0.0.0 F.F.S.F.S_0.0.0.0 S.V.A.A.A_0.0.0.0</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,]                 .                 .                 .                 .</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,]                 1                 1                 1                 1</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      S.F.S.V.A_0.0.0.0</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,]                 .</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,]                 1</span></span></code></pre></div>
+</div>
+</div>
+<div id="gapped-k-mers" class="section level3">
+<h3>Gapped k-mers</h3>
+<p>Gapped k-mers can be defined as subsequences (not necessarily contiguous) of a given sequence. In particular, between two contiguous elements of the sequence there might be a gap of the length specified by a user.</p>
+<p>A user specifies the length of each gap separately using <code>kmer_gaps</code> parameter. The other function parameters should be <code>k = length(kmer_gaps) + 1</code> (default) and <code>positional = FALSE</code> (default).</p>
+<p>For example, gapped 3-mers with gaps’ lengths 0 and 1 of sequence AABCCA are: AAC, ABC, BCA.</p>
+<div id="usage-1" class="section level4">
+<h4>Usage</h4>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count_kmers</span>(<span class="fu">c</span>(<span class="st">&quot;DDDVSVAA&quot;</span>, <span class="st">&quot;FFSFSVAAA&quot;</span>),</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">kmer_gaps=</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">0</span>)) <span class="co"># gapped 3-mer template: X__XX</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 x 9 sparse Matrix of class &quot;dgCMatrix&quot;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      D.S.V_2.0 D.V.A_2.0 D.V.S_2.0 V.A.A_2.0 S.V.A_2.0 F.S.V_2.0 F.F.S_2.0</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,]         1         1         1         1         .         .         .</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,]         .         .         .         .         1         1         1</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      S.A.A_2.0 F.A.A_2.0</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,]         .         .</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,]         1         1</span></span></code></pre></div>
+</div>
+</div>
+<div id="positional-contiguous-k-mers" class="section level3">
+<h3>Positional contiguous k-mers</h3>
+<p>A positional contiguous k-mer is a subtype of a contiguous k-mer with extra information related to the exact (start) position of the k-mer. It means that two same contiguous k-mers that start at different positions of a given sequence are considered to be different, as opposed to (non-positional) contiguous k-mers.</p>
+<p>A user specifies the length of the k-mer with <code>k</code> parameter. The other function parameters should be <code>kmer_gaps = NULL</code> (default) and <code>positional = TRUE</code>.</p>
+<p>For example, positional contiguous 3-mers of sequence AABCCA are: 1_AAB, 2_ABC, 3_BCC, 4_CCA.</p>
+<div id="usage-2" class="section level4">
+<h4>Usage</h4>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count_kmers</span>(<span class="fu">c</span>(<span class="st">&quot;DDDVSVAA&quot;</span>, <span class="st">&quot;FFSFSVAAA&quot;</span>),</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">k=</span><span class="dv">5</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">positional=</span><span class="cn">TRUE</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 x 9 sparse Matrix of class &quot;dgCMatrix&quot;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      1_D.D.D.V.S_0.0.0.0 2_D.D.V.S.V_0.0.0.0 4_V.S.V.A.A_0.0.0.0</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,]                   1                   1                   1</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,]                   .                   .                   .</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      3_D.V.S.V.A_0.0.0.0 2_F.S.F.S.V_0.0.0.0 4_F.S.V.A.A_0.0.0.0</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,]                   1                   .                   .</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,]                   .                   1                   1</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      3_S.F.S.V.A_0.0.0.0 1_F.F.S.F.S_0.0.0.0 5_S.V.A.A.A_0.0.0.0</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,]                   .                   .                   .</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,]                   1                   1                   1</span></span></code></pre></div>
+</div>
+</div>
+<div id="positional-gapped-k-mers" class="section level3">
+<h3>Positional gapped k-mers</h3>
+<p>A positional gapped k-mer is a subtype of a gapped k-mer with extra information about the exact (start) position of the k-mer. It means that two same gapped k-mers that start at different positions of a given sequence are considered to be different, as opposed to (non-positional) gapped k-mers.</p>
+<p>A user specifies the length of each gap using <code>kmer_gaps</code> parameter. The other function parameters should be <code>k = length(kmer_gaps) + 1</code> (default) and <code>positional = TRUE</code>.</p>
+<p>For example, positional gapped 3-mers with gaps’ lengths 0 and 1 of sequence AABCCA are: 1_AAC, 2_ABC, 3_BCA.</p>
+<div id="usage-3" class="section level4">
+<h4>Usage</h4>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count_kmers</span>(<span class="fu">c</span>(<span class="st">&quot;DDDVSVAA&quot;</span>, <span class="st">&quot;FFSFSVAAA&quot;</span>),</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">kmer_gaps=</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">0</span>), <span class="co"># gapped 3-mer template: X__XX</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">positional=</span><span class="cn">TRUE</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 x 9 sparse Matrix of class &quot;dgCMatrix&quot;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      1_D.V.S_2.0 3_D.V.A_2.0 2_D.S.V_2.0 4_V.A.A_2.0 2_F.S.V_2.0 4_F.A.A_2.0</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,]           1           1           1           1           .           .</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,]           .           .           .           .           1           1</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      3_S.V.A_2.0 5_S.A.A_2.0 1_F.F.S_2.0</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,]           .           .           .</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,]           1           1           1</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="result-type" class="section level2">
+<h2>Result type</h2>
+<p>The result of the k-mer counting function is a k-mer matrix, represented as a <strong>sparse matrix</strong> (see <a href="https://CRAN.R-project.org/package=Matrix">package Matrix</a>).</p>
+<p>The i-th row of the result matrix corresponds to the i-th input sequence and contains the information about particular occurrences of k-mers. On the other hand, columns correspond to k-mers found in input sequences and they are represented in a human-readable form (for more detail see section <code>Human-readable representation of k-mers</code>).</p>
+<p>Due to the usage of a sparse matrix representation, a signification memory optimization is achieved, as it can be seen below.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>get_random_string_vector <span class="ot">&lt;-</span> <span class="cf">function</span>(seq_num, seq_len, alphabet, <span class="at">seed=</span><span class="dv">123</span>) {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(seed)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>seq_num,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>         <span class="cf">function</span>(n) <span class="fu">paste0</span>(<span class="fu">sample</span>(alphabet, seq_len, <span class="at">replace=</span><span class="cn">TRUE</span>), <span class="at">collapse=</span><span class="st">&quot;&quot;</span>))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">count_kmers</span>(<span class="fu">get_random_string_vector</span>(<span class="dv">300</span>, <span class="dv">1000</span>, LETTERS),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">k=</span><span class="dv">4</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pryr<span class="sc">::</span><span class="fu">object_size</span>(r))</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20.3 MB</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pryr<span class="sc">::</span><span class="fu">object_size</span>(<span class="fu">as.matrix</span>(r)))</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 543 MB</span></span></code></pre></div>
+<p>Importantly, such a representation is supported by machine learning packages such as <a href="https://CRAN.R-project.org/package=ranger">ranger</a> and <a href="https://CRAN.R-project.org/package=xgboost">xgboost</a>. Therefore, in those cases, it does not require extra conversions.</p>
+</div>
+<div id="extra-features" class="section level2">
+<h2>Extra features</h2>
+<p>In order to improve user experience and meet custom needs, several extra features are provided.</p>
+<div id="configurable-k-mer-alphabet" class="section level3">
+<h3>Configurable k-mer alphabet</h3>
+<p>A k-mer alphabet defines which elements of a sequence should be considered during the k-mer counting procedure.</p>
+<p>By default, alphabet derived from input sequences is used:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count_kmers</span>(<span class="fu">c</span>(<span class="st">&quot;VAAAAHDFAA&quot;</span>, <span class="st">&quot;KKKKAKAAVA&quot;</span>),</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">k=</span><span class="dv">4</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 x 14 sparse Matrix of class &quot;dgCMatrix&quot;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    [[ suppressing 14 column names &#39;A.A.H.D_0.0.0&#39;, &#39;A.A.A.A_0.0.0&#39;, &#39;A.A.A.H_0.0.0&#39; ... ]]</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                 </span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,] 1 1 1 1 1 1 1 . . . . . . .</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,] . . . . . . . 1 1 1 1 1 1 1</span></span></code></pre></div>
+<p>However, a user can provide a custom k-mer alphabet (<code>c(&quot;A&quot;, &quot;K&quot;)</code>):</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count_kmers</span>(<span class="fu">c</span>(<span class="st">&quot;VAAAAHDFAA&quot;</span>, <span class="st">&quot;KKKKAKAAVA&quot;</span>),</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">k=</span><span class="dv">4</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">kmer_alphabet =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;K&quot;</span>))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 x 6 sparse Matrix of class &quot;dgCMatrix&quot;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      A.A.A.A_0.0.0 A.K.A.A_0.0.0 K.A.K.A_0.0.0 K.K.A.K_0.0.0 K.K.K.K_0.0.0</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,]             1             .             .             .             .</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,]             .             1             1             1             1</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      K.K.K.A_0.0.0</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,]             .</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,]             1</span></span></code></pre></div>
+</div>
+<div id="configurable-batch-size" class="section level3">
+<h3>Configurable batch size</h3>
+<p>The internal algorithm processes input sequences in consecutive batches of a given size. The larger the size of a batch is, the more sequences will be used in a single step that processes entries concurrently. Therefore, a user should be aware that in order to take full advantage of multi-threading, they should set the batch size to the number that is greater or equal to the number of CPU cores. However, simultaneously, this number should not be too large in order not to consume too much memory, as during a single step, all sequences of a given batch are encoded, which, in turn, increases memory usage additionally.</p>
+<p>Generally, there are two common use cases when a user should explicitly set the size of a batch size (in other cases, the default value is sufficient): 1. a user does not want to process sequences concurrently (then, they should set <code>batch_size = 1</code>) 2. a user needs to tweak the memory consumption accordingly to their custom needs</p>
+<div id="usage-4" class="section level4">
+<h4>Usage</h4>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sequences <span class="ot">&lt;-</span> <span class="fu">get_random_string_vector</span>(<span class="at">seq_num =</span> <span class="dv">200</span>, <span class="at">seq_len =</span> <span class="dv">1000</span>, <span class="at">alphabet =</span> LETTERS)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>microbenchmark<span class="sc">::</span><span class="fu">microbenchmark</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">multithreaded =</span> <span class="fu">count_kmers</span>(sequences, <span class="at">k=</span><span class="dv">5</span>, <span class="at">batch_size =</span> <span class="dv">200</span>),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">singlethreaded =</span> <span class="fu">count_kmers</span>(sequences, <span class="at">k=</span><span class="dv">5</span>, <span class="at">batch_size =</span> <span class="dv">1</span>),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">times=</span><span class="dv">11</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Single-threaded mode enabled. In order to speed up computations, increase defined batch_size or use a default value</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Single-threaded mode enabled. In order to speed up computations, increase defined batch_size or use a default value</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Single-threaded mode enabled. In order to speed up computations, increase defined batch_size or use a default value</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Single-threaded mode enabled. In order to speed up computations, increase defined batch_size or use a default value</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Single-threaded mode enabled. In order to speed up computations, increase defined batch_size or use a default value</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Single-threaded mode enabled. In order to speed up computations, increase defined batch_size or use a default value</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Single-threaded mode enabled. In order to speed up computations, increase defined batch_size or use a default value</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Single-threaded mode enabled. In order to speed up computations, increase defined batch_size or use a default value</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Single-threaded mode enabled. In order to speed up computations, increase defined batch_size or use a default value</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Single-threaded mode enabled. In order to speed up computations, increase defined batch_size or use a default value</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Single-threaded mode enabled. In order to speed up computations, increase defined batch_size or use a default value</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Unit: milliseconds</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            expr      min       lq     mean   median       uq      max neval</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   multithreaded 151.7537 154.2759 161.7023 157.5138 158.6917 217.4043    11</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  singlethreaded 213.3606 216.8147 218.0981 218.6167 219.7371 221.0856    11</span></span></code></pre></div>
+</div>
+</div>
+<div id="verbose-mode" class="section level3">
+<h3>Verbose mode</h3>
+<p>Verbose mode allows a user to get extra information about the current state of computations, e.g., which batch of sequences is currently processed.</p>
+<div id="usage-5" class="section level4">
+<h4>Usage</h4>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count_kmers</span>(<span class="fu">c</span>(<span class="st">&quot;VAAAAHDFAA&quot;</span>, <span class="st">&quot;KKKKAKAAVA&quot;</span>, <span class="st">&quot;ASDDA&quot;</span>),</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">k=</span><span class="dv">3</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">batch_size=</span><span class="dv">1</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">verbose =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Single-threaded mode enabled. In order to speed up computations, increase defined batch_size or use a default value</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Start processing sequences (batch: [1-1])...</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Start processing sequences (batch: [2-2])...</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Start processing sequences (batch: [3-3])...</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 x 17 sparse Matrix of class &quot;dgCMatrix&quot;</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    [[ suppressing 17 column names &#39;A.H.D_0.0&#39;, &#39;H.D.F_0.0&#39;, &#39;A.A.H_0.0&#39; ... ]]</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                       </span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,] 1 1 1 1 2 1 1 . . . . . . . . . .</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,] . . . . . . . 1 1 2 1 1 1 1 . . .</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3,] . . . . . . . . . . . . . . 1 1 1</span></span></code></pre></div>
+</div>
+</div>
+<div id="configurable-dimension-of-the-hash-value-of-a-k-mer" class="section level3">
+<h3>Configurable dimension of the hash value of a k-mer</h3>
+<p>As the core k-mer counting algorithm intensively takes advantage of hashing functions, <code>seqR</code> package is a probabilistic solution. However, due to the application of multi-dimensional hash values, a user can specify the length of the hash vector, and, thus, increase the probability of a correct result.</p>
+<p>Nevertheless, for small values of <code>k</code> (<code>k &lt;= 10</code>), the result is certainly correct for the default value of the parameter (i.e., <code>hash_size = 2</code>).</p>
+</div>
+<div id="compute-k-mers-with-or-without-their-frequencies" class="section level3">
+<h3>compute k-mers with or without their frequencies</h3>
+<p>This feature is particularly useful when a user only wants to get information related to presence or absence of k-mers. Then, they might set this feature (<code>with_kmer_counts = FALSE</code>).</p>
+<div id="usage-6" class="section level4">
+<h4>Usage</h4>
+<p>Compare the following two code snippets:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count_kmers</span>(<span class="fu">c</span>(<span class="st">&quot;AAAAAAADFSSAAAA&quot;</span>, <span class="st">&quot;AADADADADDAD&quot;</span>),</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">k=</span><span class="dv">3</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">with_kmer_counts=</span><span class="cn">FALSE</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 x 11 sparse Matrix of class &quot;dgCMatrix&quot;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    [[ suppressing 11 column names &#39;A.D.F_0.0&#39;, &#39;A.A.D_0.0&#39;, &#39;S.S.A_0.0&#39; ... ]]</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                           </span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,] 1 1 1 1 1 1 1 . . . .</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,] . 1 . . . . . 1 1 1 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count_kmers</span>(<span class="fu">c</span>(<span class="st">&quot;AAAAAAADFSSAAAA&quot;</span>, <span class="st">&quot;AADADADADDAD&quot;</span>),</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">k=</span><span class="dv">3</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">with_kmer_counts=</span><span class="cn">TRUE</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 x 11 sparse Matrix of class &quot;dgCMatrix&quot;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    [[ suppressing 11 column names &#39;A.D.F_0.0&#39;, &#39;A.A.D_0.0&#39;, &#39;S.S.A_0.0&#39; ... ]]</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                           </span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,] 1 1 1 1 1 1 7 . . . .</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,] . 1 . . . . . 4 3 1 1</span></span></code></pre></div>
+</div>
+</div>
+<div id="compute-a-result-k-mer-matrix-with-or-without-human-readable-k-mer-column-names" class="section level3">
+<h3>Compute a result k-mer matrix with or without human-readable k-mer (column) names</h3>
+<p>The aim of this feature is to optimize memory consumption and CPU time. It is particularly useful when many different k-mer models are tested and there is no need to get a human-readable features.</p>
+<div id="usage-7" class="section level4">
+<h4>Usage</h4>
+<p>Compare the following two code snippets:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count_kmers</span>(<span class="fu">c</span>(<span class="st">&quot;AAAAAAADFSSAAAA&quot;</span>, <span class="st">&quot;AADADADADDAD&quot;</span>),</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">k=</span><span class="dv">3</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">with_kmer_names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 x 11 sparse Matrix of class &quot;dgCMatrix&quot;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                           </span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,] 1 1 1 1 1 1 7 . . . .</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,] . 1 . . . . . 4 3 1 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count_kmers</span>(<span class="fu">c</span>(<span class="st">&quot;AAAAAAADFSSAAAA&quot;</span>, <span class="st">&quot;AADADADADDAD&quot;</span>),</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">k=</span><span class="dv">3</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">with_kmer_names=</span><span class="cn">TRUE</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 x 11 sparse Matrix of class &quot;dgCMatrix&quot;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    [[ suppressing 11 column names &#39;A.D.F_0.0&#39;, &#39;A.A.D_0.0&#39;, &#39;S.S.A_0.0&#39; ... ]]</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                           </span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,] 1 1 1 1 1 1 7 . . . .</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,] . 1 . . . . . 4 3 1 1</span></span></code></pre></div>
+</div>
+</div>
+<div id="count-k-mers-of-several-types-in-a-single-function-invocation" class="section level3">
+<h3>Count k-mers of several types in a single function invocation</h3>
+<p>For the sake of convenient usage, an extra wrapper (<code>count_multimers</code>) has been implemented. It makes possible counting k-mers of various type using only a single invocation of a function. In this case, a user must provide sequences (rather than single values) that denote k-mer configurations (for more detail see the documentation of <code>count_multimers</code>).</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count_multimers</span>(<span class="fu">c</span>(<span class="st">&quot;AAAAAAADFSSAAAA&quot;</span>, <span class="st">&quot;AADADADADDAD&quot;</span>),</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">k_vector=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">verbose=</span><span class="cn">TRUE</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Processing sequences for config no.1&quot;</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Start processing sequences (batch: [1-2])...</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Processing sequences for config no.2&quot;</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Start processing sequences (batch: [1-2])...</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Processing sequences for config no.3&quot;</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Start processing sequences (batch: [1-2])...</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Processing sequences for config no.4&quot;</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Start processing sequences (batch: [1-2])...</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 x 37 sparse Matrix of class &quot;dgCMatrix&quot;</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    [[ suppressing 37 column names &#39;S&#39;, &#39;D&#39;, &#39;A&#39; ... ]]</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                                                </span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,] 2 1 11 1 1 1 1 9 1 1 . . 1 1 1 1 1 1 7 . . . . 1 5 1 1 1 1 1 1 . . . . . .</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,] . 6  6 . . . . 1 5 . 1 4 . 1 . . . . . 4 3 1 1 . . . . . . . . 1 2 1 1 1 3</span></span></code></pre></div>
+</div>
+<div id="merge-rbind-two-k-mer-matrices-derived-from-distinct-sequences" class="section level3">
+<h3>Merge (rbind) two k-mer matrices derived from distinct sequences</h3>
+<p>As <code>rbind</code> function does not work correctly if input matrices does not have equivalent sets of columns, <code>seqR</code> package provides a new function (<code>rbind_columnwise</code>) to satisfy this use case:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mA <span class="ot">&lt;-</span> <span class="fu">count_kmers</span>(<span class="fu">c</span>(<span class="st">&quot;AAAAAAADFSSAAAA&quot;</span>, <span class="st">&quot;AADADADADDAD&quot;</span>),</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">k=</span><span class="dv">1</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>mB <span class="ot">&lt;-</span> <span class="fu">count_kmers</span>(<span class="fu">c</span>(<span class="st">&quot;VVVVVAAVA&quot;</span>, <span class="st">&quot;ADSDDD&quot;</span>, <span class="st">&quot;AAAAAV&quot;</span>),</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">k=</span><span class="dv">1</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind_columnwise</span>(mA, mB)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 x 5 sparse Matrix of class &quot;dgCMatrix&quot;</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      S D  A F V</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,] 2 1 11 1 .</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2,] . 6  6 . .</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [3,] . .  3 . 6</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4,] 1 4  1 . .</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [5,] . .  5 . 1</span></span></code></pre></div>
+</div>
+</div>
+<div id="human-readable-representation-of-k-mers" class="section level2">
+<h2>Human-readable representation of k-mers</h2>
+<p>Each column of the result represents a single k-mer that has the following form:</p>
+<p><code>[p_]s₁.s₂....sₖ_g₁.g₂...gₖ₋₁</code></p>
+<p>The first part (<code>[p_]</code>) is an integer that is used only in case of positional k-mers and it indicates the exact (start) position of the k-mer in a sequence. The second part (<code>s₁.s₂....sₖ</code>) represents consecutive elements of the k-mer. Finally, the last part (<code>g₁.g₂...gₖ₋₁</code>) represents the consecutive lengths of gaps. In particular, if contiguous k-mers are considered, all elements of this part is equal to 0 (e.g., <code>0.0.0</code> for 4-mers). Importantly, for 1-mers, this part is not present.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
