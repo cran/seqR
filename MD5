@@ -1,4 +1,4 @@
-9435cc139463ff6375aa6f691fd3e796 *DESCRIPTION
+ca759c9de9001bbe6c86e48bf1d3ffe0 *DESCRIPTION
 e1632bbfe5746b9b7ec109262caad801 *NAMESPACE
 a31dca87af8e5479522768b8aea12c1d *R/CsgA.R
 d4384e68c1c0d7f357eb43874f452cf4 *R/RcppExports.R
@@ -11,7 +11,7 @@ cc980d7d82439d9fa282691fc790eb13 *R/count_multimers.R
 0dfe97a3d8736fd9a2401ce87f24274a *R/package.R
 ab11bb69a08ba427ebd8b68802bc9a68 *R/seqR_result.R
 c8ed5ed09e3f95684065ac2a22a251f0 *R/zzz.R
-1fe12b4b6e41a928de81b58127835b7b *README.md
+1d3e501830de7e85f6a040b351edc8b9 *README.md
 77ab4dabae00ec4049ee588c4ad7c903 *build/vignette.rds
 c3cded853a2388ad53569a7105d1c1e3 *cleanup
 2026a6bbd3c047aa7ec927181789bd13 *configure
@@ -21,7 +21,7 @@ c3cded853a2388ad53569a7105d1c1e3 *cleanup
 ccc02b22f28dd17b6326d2d6dd1ae86c *inst/WORDLIST
 55a0237ed554f8948aa8c5f2d73fe8f6 *inst/doc/features-overview.R
 1d6841b622a6fb24280538dcd5b23946 *inst/doc/features-overview.Rmd
-bec6470ee64678c9ea345407af1f382a *inst/doc/features-overview.html
+37424bb5add2e1607a8568b4f773ad54 *inst/doc/features-overview.html
 5124508a31b9eea85f2a125a201e770a *inst/thirdparty/dictionaries/robin_hood_martinus.h
 c11e580fa4704b855fb435accb3d0048 *man/CsgA.Rd
 0c37e5bd948df560b3b437abbdbcac5f *man/count_kmers.Rd
@@ -43,7 +43,7 @@ ddf438fd1fcda2153b5e7ebaa627ac68 *src/contiguous_kmer_counter.h
 8eb849b68dfe5e07fc6f5163f43c9058 *src/count_kmers_specific/count_kmers_string_vector.h
 f153ea76a0e30aa0ae2c428b9de22dab *src/count_kmers_specific/encoded_sequence/encoded_sequence_proxy.h
 7857bc2ef75247387a953142b3780bce *src/count_kmers_specific/encoded_sequence/raw_encoded_sequences_list.h
-4256b53c2470b02e2f5b5b434dd5fdbe *src/gapped_kmer_counter.h
+a05e2a648a1df48211db2259e815be20 *src/gapped_kmer_counter.h
 a05d94903b72e984f9009992ddebe14a *src/hash/complex_hasher.h
 a10efd665de15720cf3e75ba7b03fd56 *src/hash/custom_vector_hasher.h
 9d48cddca5821a24ab36279fbbb8ed96 *src/hash/globals.h

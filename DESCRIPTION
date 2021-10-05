@@ -1,8 +1,8 @@
 Package: seqR
 Type: Package
 Title: Fast and Comprehensive K-Mer Counting Package
-Version: 1.0.0
-Date: 2021-09-13
+Version: 1.0.1
+Date: 2021-09-27
 Authors@R: c(
     person(given = "Jadwiga",
            family = "Słowik",
@@ -35,9 +35,9 @@ Collate: 'CsgA.R' 'RcppExports.R' 'atomic_validators.R' 'common.R'
         'seqR_result.R' 'kmer_typed_functions.R'
         'kmer_functions_provider.R' 'count_kmers.R' 'count_multimers.R'
         'package.R' 'zzz.R'
-Packaged: 2021-09-14 14:52:39 UTC; slowik
+Packaged: 2021-09-27 16:48:12 UTC; slowik
 Author: Jadwiga Słowik [aut, cre] (<https://orcid.org/0000-0003-3466-8933>),
   Michał Burdukiewicz [ths] (<https://orcid.org/0000-0001-8926-582X>)
 Maintainer: Jadwiga Słowik <jadwiga.slowik5@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-09-15 09:00:02 UTC
+Date/Publication: 2021-10-05 23:20:13 UTC
